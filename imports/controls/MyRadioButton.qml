@@ -2,8 +2,8 @@ import QtQuick 2.11
 
 Item {
     id: root
-    width: 50
-    height: 50
+    width: 30
+    height: 30
 
     property alias text: textLabel.text
     property bool checked: false
@@ -31,14 +31,14 @@ Item {
         anchors.left: fillRect.right
         anchors.leftMargin: 10
         anchors.verticalCenter: parent.verticalCenter
-        font.pixelSize: 14
+        font.pixelSize: 16
         color: "#A8A8A8"
     }
 
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            root.checked = true;
+            root.checked = !checked;
         }
     }
 }

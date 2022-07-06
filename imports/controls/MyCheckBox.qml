@@ -1,5 +1,6 @@
 import QtQuick 2.11
-import QtGraphicalEffects 1.0
+import Qt5Compat.GraphicalEffects
+
 
 Item {
     id: root
@@ -17,7 +18,7 @@ Item {
             width: 30
             height: 30
             anchors.centerIn: parent
-            source:  "../../assets/check.png"
+            source:  "assets/check.png"
             visible: root.checked
             ColorOverlay {
                 anchors.fill: buttonImage
