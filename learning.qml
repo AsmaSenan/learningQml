@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
-import "imports/controls"
+import controls 1.0
 Window {
     width: 640
     height: 480
@@ -37,6 +37,9 @@ Window {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: textEdit.bottom
         anchors.topMargin: 30
+        onCheckedChanged: {
+            console.log("Radio checked")
+        }
     }
     MyCheckBox{
         id:checkBox
@@ -44,6 +47,26 @@ Window {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: radioButton.bottom
         anchors.topMargin: 30
+        onCheckedChanged: {
+            if(checked)
+                console.log("Checkbox checked")
+            else
+                console.log("Checkbox unchecked")
+        }
+
+    }
+    MySwitch{
+        width: 180
+        text: "It's Switch Button"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: checkBox.bottom
+        anchors.topMargin: 30
+        onCheckedChanged: {
+            if(checked)
+                console.log("switch Button checked")
+            else
+                console.log("switch Button unchecked")
+        }
 
     }
 }

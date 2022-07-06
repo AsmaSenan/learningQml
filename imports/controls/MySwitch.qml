@@ -50,12 +50,12 @@ Item {
     states: [
         State {
             name: "on"
-            PropertyChanges { target: indicator; x: (background.width - indicator.width) }
+            PropertyChanges { target: indicator; x: (background.width - indicator.width); color: "#00D1A9"}
             PropertyChanges { target: root; checked: true }
         },
         State {
             name: "off"
-            PropertyChanges { target: indicator; x: 0 }
+            PropertyChanges { target: indicator; x: 0; color: "gray"}
             PropertyChanges { target: root; checked: false }
         }
     ]
