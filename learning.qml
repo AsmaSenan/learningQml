@@ -1,72 +1,102 @@
-import QtQuick 2.15
+import QtQuick 2.1
 import QtQuick.Window 2.15
+import QtQuick.Controls 2.2
+import Qt5Compat.GraphicalEffects
+
 import controls 1.0
-Window {
-    width: 640
-    height: 480
+
+ApplicationWindow {
+    width: 595
+    height: 842
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("QML Course")
 
-    MouseArea{
-        anchors.fill: parent
-        onClicked: {
-            console.log("U clicked the outside", textEdit.text)
-        }
+    ListModel{
+        id: listModel
+        ListElement {url: "sheets/WidgetsSheet.qml"; text: "Basic Widgets"}
+        ListElement {url: "sheets/GridViewSheet.qml"; text: "Grid View"}
+        ListElement {url: "sheets/ListViewSheet.qml"; text: "List View"}
+        ListElement {url: "sheets/PathViewSheet.qml"; text: "Path View"}
     }
 
-    TextEdit{
-        id: textEdit
-        height: 40
-        width: 140
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
-        anchors.topMargin: 30
-        verticalAlignment: Text.AlignVCenter
-        horizontalAlignment: Text.AlignHCenter
+    header: Item{
+        width: parent.width
+        height:30
         Rectangle{
+            id: pageHeader
             anchors.fill: parent
-            color: "transparent"
-            border.color: "black"
+            color: "white"
+        }
+        DropShadow{
+            anchors.fill: pageHeader
+            //            horizontalOffset: 3
+            verticalOffset: 3
+            radius: 8.0
+            color: "#80000000"
+            source: pageHeader
 
         }
-    }
-    MyRadioButton{
-        id: radioButton
-        width: 140
-        text: "It is Radio"
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: textEdit.bottom
-        anchors.topMargin: 30
-        onCheckedChanged: {
-            console.log("Radio checked")
-        }
-    }
-    MyCheckBox{
-        id:checkBox
-//        text: "It is Checkbox"
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: radioButton.bottom
-        anchors.topMargin: 30
-        onCheckedChanged: {
-            if(checked)
-                console.log("Checkbox checked")
-            else
-                console.log("Checkbox unchecked")
-        }
 
-    }
-    MySwitch{
-        width: 180
-        text: "It's Switch Button"
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: checkBox.bottom
-        anchors.topMargin: 30
-        onCheckedChanged: {
-            if(checked)
-                console.log("switch Button checked")
-            else
-                console.log("switch Button unchecked")
+        Text {
+            text: listModel.get(listView.currentIndex).text
+            anchors.centerIn: parent
         }
-
     }
+
+    contentData: Item{
+        anchors.fill: parent
+
+        Rectangle{
+            width: 185
+            height: parent.height
+            color: "#00D1A9"
+
+            ListView {
+                id: listView
+                anchors.fill: parent
+                anchors.topMargin: 50
+                model:listModel
+                interactive: false
+                spacing: 10
+                highlight: Item{
+                    width: parent.width
+                    height: 47
+                    Rectangle{
+                        anchors.fill: parent
+                        color: "#D1DBE1"
+                        opacity: 0.6
+                    }
+                    Rectangle{
+                        width: 4
+                        height: parent.height
+                        color: "#fff"
+                    }
+                }
+                delegate : Item{
+                    width: parent.width
+                    height: 47
+                    Text{
+                        anchors.centerIn: parent
+                        color:"white"
+                        text: model.text
+                    }
+                    MouseArea{
+                        anchors.fill: parent
+                        onClicked: {
+                            listView.currentIndex = index;
+                            stackView.push(Qt.resolvedUrl(model.url));
+                        }
+                    }
+                }
+            }
+        }
+        StackView{
+            id: stackView
+            width: parent.width - listView.width
+            height: parent.height
+            anchors.right: parent.right
+            initialItem: Qt.resolvedUrl("sheets/WidgetsSheet.qml")
+        }
+    }
+
 }

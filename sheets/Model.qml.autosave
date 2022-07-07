@@ -1,0 +1,13 @@
+import QtQuick 2.0
+
+ListModel {
+    id: fruitsList
+    
+    ListElement{ name: "Apple"; price: 2; pic: "images/apple.png"}
+    ListElement{ name: "Banana"; price: 1; pic: "images/banana.png"}
+    ListElement{ name: "Orange"; price: 2.5; pic: "images/orange.png"}
+    ListElement{ name: "Manngo"; price: 1.75; pic: "images/Manngo.png"}
+    ListElement{ name: "Grapes"; price: 1; pic: "images/Grapes.png"}
+    ListElement{ name: "Pinea"; price: 2; pic: "images/apple.png"}
+    
+}
